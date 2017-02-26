@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // add x-axis label
   drawLabel(
-    svg,                                            // elementToAppendTo
-    getChartWidth() / 2,  // x
-    chartHeight + margins.bottom,                   // y
-    'Time'                                          // text
+    svg,                           // elementToAppendTo
+    getChartWidth() / 2,           // x
+    chartHeight + margins.bottom,  // y
+    'Time'                         // text
   );
 
   // add y-axis label
@@ -155,11 +155,13 @@ function drawLabel(elementToAppendTo, x, y, text, transform) {
 }
 
 function generateLineNums(desiredNumberOfLines) {
+  // get an adjusted maxValue (110% of maxValue)
   let chartMax = maxValue + (maxValue * 0.1);
   let lines = [];
 
   let step = chartMax / desiredNumberOfLines;
   for(var i = 0; i < desiredNumberOfLines; i++) {
+    // add step to last line, or make step the valuue of first line
     let thisStep = lines[i - 1] !== undefined ? lines[i - 1] + step : step;
     lines.push(Math.ceil(thisStep));
   }
