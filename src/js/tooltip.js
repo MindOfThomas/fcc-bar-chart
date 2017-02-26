@@ -23,7 +23,7 @@ module.exports = {
     let tooltip = document.getElementById('tooltip');
     let tooltipSpan = document.querySelector('#tooltip span');
 
-    tooltipSpan.innerText = d;
+    tooltipSpan.textContent = d;
     tooltip.style.visibility = 'visible';
   },
   mousemoveHandler: function() {
