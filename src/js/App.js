@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
              .append('g')
              .attr('width', barWidth)
              .attr('height', chartHeight)
-             .attr('x', getBarWidth)
+             .attr('x', getBarX)
              .attr('y', 0)
              .on('mouseover', function(d) {
                let money = d * 1000000000; // convert to billions
@@ -80,14 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'bg')
-   .attr('x', getBarWidth);
+   .attr('x', getBarX);
 
   // add a rect to represent the value
   g.append('rect')
    .attr('class', 'bar')
    .attr('width', barWidth)
    .attr('height', getBarHeight)
-   .attr('x', getBarWidth)
+   .attr('x', getBarX)
    .attr( 'y', (d) => chartHeight - getBarHeight(d) );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'fg')
-   .attr('x', getBarWidth);
+   .attr('x', getBarX);
 });
 
-function getBarWidth(d, i) {
+function getBarX(d, i) {
   return margins.left + (i * barWidth);
 }
 function getBarHeight(d) {
