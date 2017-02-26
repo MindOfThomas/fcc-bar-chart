@@ -5,12 +5,15 @@ const margins = {bottom: 50, left: 50};
 const d3 = require('d3');
 const numeral = require('numeral');
 const tooltip = require('./tooltip.js');
-const data = require('./data.json');
 
+const data = require('./data.json');
 const dates = data.data.map((val) => val[0]);
 const values = data.data.map((val) => val[1]);
 const maxValue = Math.max(...values);
-const chartLines = generateLineNums(5);
+
+const calc = require('./calculations.js');
+calc.init(barWidth, chartHeight, margins, values, maxValue);
+const chartLines = calc.generateLineNums(5);
 
 numeral.register('locale', 'en-capital', {
     delimiters: {
@@ -40,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let svg = d3.select('#graph-container')
               .append('svg')
               .attr('id', 'graph')
-              .attr('width', getChartWidth())
-              .attr('height', chartHeight + margins.bottom);
+              .attr('width', calc.chartAdjWidth())
+              .attr('height', calc.chartAdjHeight());
 
   // add a g to group our rects
   let g = svg.selectAll('g')
@@ -50,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
              .append('g')
              .attr('width', barWidth)
              .attr('height', chartHeight)
-             .attr('x', getBarX)
+             .attr('x', calc.barX)
              .attr('y', 0)
              .on('mouseover', function(d) {
                let money = d * 1000000000; // convert to billions
@@ -66,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     barWidth,      // width
     chartHeight,   // height
     'background',  // class
-    getBarX,       // x
+    calc.barX,     // x
     0              // y
   );
 
@@ -74,10 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
   drawBar(
     g,
     barWidth,
-    getAdjustedY,
+    calc.adjY,
     'bar',
-    getBarX,
-    (d) => chartHeight - getAdjustedY(d)
+    calc.barX,
+    (d) => chartHeight - calc.adjY(d)
   );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
@@ -87,16 +90,16 @@ document.addEventListener('DOMContentLoaded', function() {
     barWidth,
     chartHeight,
     'foreground',
-    getBarX,
+    calc.barX,
     0
   );
 
   // add x-axis label
   drawLabel(
-    svg,                           // elementToAppendTo
-    getChartWidth() / 2,           // x
-    chartHeight + margins.bottom,  // y
-    'Time'                         // text
+    svg,                       // elementToAppendTo
+    calc.chartAdjWidth() / 2,  // x
+    calc.chartAdjHeight(),     // y
+    'Time'                     // text
   );
 
   // add y-axis label
@@ -110,28 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   drawLines(svg);
 });
-
-function getChartWidth() {
-  return margins.left + (barWidth * values.length);
-}
-
-function getBarX(d, i) {
-  return margins.left + (i * barWidth);
-}
-
-function getAdjustedY(thisValue) {
-  /*
-    normally you would make the percent = thisValue / maxValue
-    this would cause the maxValue to touch the top of the graph
-    the last item in chartLines should be a value slightly higher than maxValue
-    so divide thisValue by the slightly higher maxValue so that maxValue will be
-      noticeably below the top of the graph
-  */
-  let percent = thisValue / chartLines[chartLines.length - 1];
-
-  // multiply percent (currently a decimal) by chartHeight to get a height relative to chartHeight
-  return percent * chartHeight;
-}
 
 function drawBar(elementToAppendTo, width, height, className, x, y) {
   elementToAppendTo.append('rect')
@@ -154,42 +135,27 @@ function drawLabel(elementToAppendTo, x, y, text, transform) {
   }
 }
 
-function generateLineNums(desiredNumberOfLines) {
-  // get an adjusted maxValue (110% of maxValue)
-  let chartMax = maxValue + (maxValue * 0.1);
-  let lines = [];
-
-  let step = chartMax / desiredNumberOfLines;
-  for(var i = 0; i < desiredNumberOfLines; i++) {
-    // add step to last line, or make step the valuue of first line
-    let thisStep = lines[i - 1] !== undefined ? lines[i - 1] + step : step;
-    lines.push(Math.ceil(thisStep));
-  }
-
-  return lines;
-}
-
 function drawLines(elementToAppendTo) {
   for (var i = 0; i < chartLines.length; i++) {
     let lineValue = chartLines[i];
-    let y = getAdjustedY(lineValue);
+    let y = calc.adjY(lineValue);
 
     // if this line's y coord is at or above the chart's height then don't draw this line
     if (y >= chartHeight) continue;
 
     drawLine(
-      elementToAppendTo,    // elementToAppendTo
-      margins.left * 0.8,   // x1 (don't draw the line all the way through the margin)
-      y,                    // y1
-      getChartWidth(),      // x2
-      y                     // y2
+      elementToAppendTo,   // elementToAppendTo
+      margins.left * 0.8,  // x1 (don't draw the line all the way through the margin)
+      y,                   // y1
+      calc.chartAdjWidth(),   // x2
+      y                    // y2
     );
   }
 
   // add x-axis line
   let xaxisY = chartHeight;
   let xaxisX1 = margins.left;
-  let xaxisX2 = getChartWidth();
+  let xaxisX2 = calc.chartAdjWidth();
   drawLine(
     elementToAppendTo,  // elementToAppendTo
     xaxisX1,            // x1
