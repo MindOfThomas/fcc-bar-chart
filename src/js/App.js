@@ -78,27 +78,14 @@ document.addEventListener('DOMContentLoaded', function() {
              .on('mouseout', tooltip.mouseoutHandler);
 
   // add background rect for aesthetics
-  g.append('rect')
-   .attr('width', barWidth)
-   .attr('height', chartHeight)
-   .attr('class', 'bg')
-   .attr('x', getBarX);
+  drawBar(g, barWidth, chartHeight, 'bg', getBarX, 0);
 
   // add a rect to represent the value
-  g.append('rect')
-   .attr('class', 'bar')
-   .attr('width', barWidth)
-   .attr('height', getBarHeight)
-   .attr('x', getBarX)
-   .attr( 'y', (d) => chartHeight - getBarHeight(d) );
+  drawBar(g, barWidth, getBarHeight, 'bar', getBarX, (d) => chartHeight - getBarHeight(d));
 
   // add a foreground rect that will be transparent unless the user is hovering on it
   // this way the entire column will highlight
-  g.append('rect')
-   .attr('width', barWidth)
-   .attr('height', chartHeight)
-   .attr('class', 'fg')
-   .attr('x', getBarX);
+  drawBar(g, barWidth, chartHeight, 'fg', getBarX, 0);
 });
 
 function getBarX(d, i) {
@@ -106,4 +93,13 @@ function getBarX(d, i) {
 }
 function getBarHeight(d) {
   return (d / maxValue) * chartHeight;
+}
+
+function drawBar(elementToAppendTo, width, height, className, x, y) {
+  elementToAppendTo.append('rect')
+                   .attr('width', width)
+                   .attr('height', height)
+                   .attr('class', className)
+                   .attr('x', x)
+                   .attr('y', y);
 }
