@@ -20,8 +20,8 @@ module.exports = {
   mousemoveHandler: function() {
     let tooltip = document.getElementById('tooltip');
 
-    let newTop = (event.pageY - 15) + 'px';
-    let newLeft = (event.pageX + 13) + 'px';
+    let newTop = (event.pageY - 20) + 'px';
+    let newLeft = (event.pageX + 12) + 'px';
 
     tooltip.style.top = newTop;
     tooltip.style.left = newLeft;
