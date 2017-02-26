@@ -1,43 +1,31 @@
-let barWidth;
-let chartHeight;
-let margins;
-let data;
-let maxValue;
-let chartLines;
+const info = require('./info.js');
 
 module.exports = {
-  init: function(bWidth, cHeight, margs, d, maxV) {
-    barWidth = bWidth;
-    chartHeight = cHeight;
-    margins = margs;
-    data = d;
-    maxValue = maxV;
-  },
   chartAdjWidth: function() {
-    return margins.left + (barWidth * data.length);
+    return info.margins.left + (info.bar.width * info.values.length);
   },
   chartAdjHeight: function() {
-    return chartHeight + margins.bottom;
+    return info.chart.height + info.margins.bottom;
   },
   barX: function(value, index) {
-    return margins.left + (index * barWidth);
+    return info.margins.left + (index * info.bar.width);
   },
   adjY: function(value) {
     /*
-      normally you would make the percent = value / maxValue
-      this would cause the maxValue to touch the top of the graph
-      the last item in chartLines should be a value slightly higher than maxValue
-      so divide value by the slightly higher maxValue so that maxValue will be
+      normally you would make the percent = value / info.maxValue
+      this would cause the info.maxValue to touch the top of the graph
+      the last item in chartLines should be a value slightly higher than info.maxValue
+      so divide value by the slightly higher info.maxValue so that info.maxValue will be
         noticeably below the top of the graph
     */
-    let percent = value / chartLines[chartLines.length - 1];
+    let percent = value / info.chart.lines[info.chart.lines.length - 1];
 
     // multiply percent (currently a decimal) by chartHeight to get a height relative to chartHeight
-    return percent * chartHeight;
+    return percent * info.chart.height;
   },
   generateLineNums: function(desiredNumberOfLines) {
-    // get an adjusted maxValue (110% of maxValue)
-    let chartMax = maxValue + (maxValue * 0.1);
+    // get an adjusted info.maxValue (110% of info.maxValue)
+    let chartMax = info.maxValue + (info.maxValue * 0.1);
     let lines = [];
 
     let step = chartMax / desiredNumberOfLines;
@@ -46,8 +34,6 @@ module.exports = {
       let thisStep = lines[i - 1] !== undefined ? lines[i - 1] + step : step;
       lines.push(Math.ceil(thisStep));
     }
-
-    chartLines = lines;
 
     return lines;
   }

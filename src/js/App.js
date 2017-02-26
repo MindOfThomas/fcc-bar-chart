@@ -1,19 +1,10 @@
-const barWidth = 2;
-const chartHeight = 350;
-const margins = {bottom: 50, left: 50};
+const info = require('./info.js');
+const calc = require('./calculations.js');
+info.chart.lines = calc.generateLineNums(5);
 
 const d3 = require('d3');
 const numeral = require('numeral');
 const tooltip = require('./tooltip.js');
-
-const data = require('./data.json');
-const dates = data.data.map((val) => val[0]);
-const values = data.data.map((val) => val[1]);
-const maxValue = Math.max(...values);
-
-const calc = require('./calculations.js');
-calc.init(barWidth, chartHeight, margins, values, maxValue);
-const chartLines = calc.generateLineNums(5);
 
 numeral.register('locale', 'en-capital', {
     delimiters: {
@@ -48,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // add a g to group our rects
   let g = svg.selectAll('g')
-             .data(values)
+             .data(info.values)
              .enter()
              .append('g')
-             .attr('width', barWidth)
-             .attr('height', chartHeight)
+             .attr('width', info.bar.width)
+             .attr('height', info.chart.height)
              .attr('x', calc.barX)
              .attr('y', 0)
              .on('mouseover', function(d) {
@@ -65,30 +56,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // add background rect for aesthetics
   drawBar(
-    g,             // elementToAppendTo
-    barWidth,      // width
-    chartHeight,   // height
-    'background',  // class
-    calc.barX,     // x
-    0              // y
+    g,                  // elementToAppendTo
+    info.bar.width,     // width
+    info.chart.height,  // height
+    'background',       // class
+    calc.barX,          // x
+    0                   // y
   );
 
   // add a rect to represent the value
   drawBar(
     g,
-    barWidth,
+    info.bar.width,
     calc.adjY,
     'bar',
     calc.barX,
-    (d) => chartHeight - calc.adjY(d)
+    (d) => info.chart.height - calc.adjY(d)
   );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
   // this way the entire column will highlight on hover
   drawBar(
     g,
-    barWidth,
-    chartHeight,
+    info.bar.width,
+    info.chart.height,
     'foreground',
     calc.barX,
     0
@@ -105,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // add y-axis label
   drawLabel(
     svg,
-    '-' + (chartHeight / 2),  // x (but acting as y because this label is rotated -90deg)
-    margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
+    '-' + (info.chart.height / 2),  // x (but acting as y because this label is rotated -90deg)
+    info.margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
     'Value',
     'rotate(-90)'             // transform property
   );
@@ -136,16 +127,16 @@ function drawLabel(elementToAppendTo, x, y, text, transform) {
 }
 
 function drawLines(elementToAppendTo) {
-  for (var i = 0; i < chartLines.length; i++) {
-    let lineValue = chartLines[i];
+  for (var i = 0; i < info.chart.lines.length; i++) {
+    let lineValue = info.chart.lines[i];
     let y = calc.adjY(lineValue);
 
     // if this line's y coord is at or above the chart's height then don't draw this line
-    if (y >= chartHeight) continue;
+    if (y >= info.chart.height) continue;
 
     drawLine(
       elementToAppendTo,   // elementToAppendTo
-      margins.left * 0.8,  // x1 (don't draw the line all the way through the margin)
+      info.margins.left * 0.8,  // x1 (don't draw the line all the way through the margin)
       y,                   // y1
       calc.chartAdjWidth(),   // x2
       y                    // y2
@@ -153,8 +144,8 @@ function drawLines(elementToAppendTo) {
   }
 
   // add x-axis line
-  let xaxisY = chartHeight;
-  let xaxisX1 = margins.left;
+  let xaxisY = info.chart.height;
+  let xaxisX1 = info.margins.left;
   let xaxisX2 = calc.chartAdjWidth();
   drawLine(
     elementToAppendTo,  // elementToAppendTo
@@ -166,13 +157,13 @@ function drawLines(elementToAppendTo) {
   );
 
   // add y-axis line
-  let yaxisX = margins.left; // don't draw the line all the way through the margin
+  let yaxisX = info.margins.left; // don't draw the line all the way through the margin
   drawLine(
     elementToAppendTo,  // elementToAppendTo
     yaxisX,             // x1
     0,                  // y1
     yaxisX,             // x2
-    chartHeight,        // y2
+    info.chart.height,        // y2
     'axis'
   );
 }
