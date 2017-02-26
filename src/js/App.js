@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .attr('width', margins.left + (values.length * barWidth))
               .attr('height', chartHeight + margins.bottom);
 
+  // add x-axis label
   svg.append('text')
      .attr('class', 'label')
      .attr('text-anchor', 'middle')
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
      .attr('y', chartHeight + margins.bottom)
      .text('Time');
 
+  // add y-axis label
   svg.append('text')
      .attr('class', 'label')
      .attr('text-anchor', 'start')
