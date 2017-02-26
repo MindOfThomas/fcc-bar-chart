@@ -187,32 +187,36 @@ function drawLines(elementToAppendTo) {
   }
 
   // add x-axis line
-  let xaxisY = chartHeight + margins.bottom * 0.07;
-  let xaxisX1 = margins.left * 0.95;
+  let xaxisY = chartHeight;
+  let xaxisX1 = margins.left;
   let xaxisX2 = getChartWidth();
   drawLine(
     elementToAppendTo,  // elementToAppendTo
     xaxisX1,            // x1
     xaxisY,             // y1
     xaxisX2,            // x2
-    xaxisY              // y2
+    xaxisY,             // y2
+    'axis'
   );
 
   // add y-axis line
-  let yaxisX = margins.left * 0.95; // don't draw the line all the way through the margin
+  let yaxisX = margins.left; // don't draw the line all the way through the margin
   drawLine(
     elementToAppendTo,  // elementToAppendTo
     yaxisX,             // x1
     0,                  // y1
     yaxisX,             // x2
-    chartHeight         // y2
+    chartHeight,        // y2
+    'axis'
   );
 }
 
-function drawLine(elementToAppendTo, x1, y1, x2, y2) {
+function drawLine(elementToAppendTo, x1, y1, x2, y2, className) {
+  className = className || '';
   elementToAppendTo.append('line')
                    .attr('x1', x1)
                    .attr('y1', y1)
                    .attr('x2', x2)
-                   .attr('y2', y2);
+                   .attr('y2', y2)
+                   .attr('class', className);
 }
