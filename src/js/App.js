@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   svg.append('text')
      .attr('class', 'label')
-     .attr('text-anchor', 'end')
-     .attr('x', (barWidth * values.length) / 2)
+     .attr('text-anchor', 'middle')
+     .attr('x', margins.left + (barWidth * values.length) / 2)
      .attr('y', chartHeight + margins.bottom)
      .text('Time');
 
