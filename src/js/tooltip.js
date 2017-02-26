@@ -9,12 +9,21 @@ module.exports = {
     div.style.zIndex = '10';
     div.style.visibility = 'hidden';
 
+    let arrowDiv = document.createElement('div');
+    arrowDiv.className = 'arrow';
+
+    let span = document.createElement('span');
+
+    div.appendChild(arrowDiv);
+    div.appendChild(span);
+
     document.body.appendChild(div);
   },
   mouseoverHandler: function(d) {
     let tooltip = document.getElementById('tooltip');
+    let tooltipSpan = document.querySelector('#tooltip span');
 
-    tooltip.textContent = d;
+    tooltipSpan.innerText = d;
     tooltip.style.visibility = 'visible';
   },
   mousemoveHandler: function() {

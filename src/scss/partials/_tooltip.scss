@@ -7,8 +7,7 @@ div#tooltip {
 
   pointer-events: none;
 
-  &:before {
-    content:"\A";
+  .arrow {
     border-style: solid;
     border-width: 7px 12px 7px 0;
     border-color: transparent $darkMainColor transparent transparent;
