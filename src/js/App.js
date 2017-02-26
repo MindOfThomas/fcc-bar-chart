@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // add y-axis label
   svg.append('text')
      .attr('class', 'label')
-     .attr('text-anchor', 'start')
+     .attr('text-anchor', 'middle')
      .attr('x', '-' + (chartHeight / 2)) // x and y are flipped because of the rotation
      .attr('y', margins.bottom / 2) // this might not always put the label within the chart's bounds
      .attr('transform', 'rotate(-90)')
