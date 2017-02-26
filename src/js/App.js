@@ -178,11 +178,11 @@ function drawLines(elementToAppendTo) {
     if (y >= chartHeight) continue;
 
     drawLine(
-      elementToAppendTo,  // elementToAppendTo
-      margins.left / 2,   // x1 (don't draw the line all the way through the margin)
-      y,                  // y1
-      getChartWidth(),    // x2
-      y                   // y2
+      elementToAppendTo,    // elementToAppendTo
+      margins.left * 0.8,   // x1 (don't draw the line all the way through the margin)
+      y,                    // y1
+      getChartWidth(),      // x2
+      y                     // y2
     );
   }
 }
