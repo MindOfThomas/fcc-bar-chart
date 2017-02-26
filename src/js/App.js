@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
   drawBar(
     g,
     barWidth,
-    getBarHeight,
+    getAdjustedY,
     'bar',
     getBarX,
-    (d) => chartHeight - getBarHeight(d)
+    (d) => chartHeight - getAdjustedY(d)
   );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
@@ -111,8 +111,19 @@ document.addEventListener('DOMContentLoaded', function() {
 function getBarX(d, i) {
   return margins.left + (i * barWidth);
 }
-function getBarHeight(d) {
-  return (d / maxValue) * chartHeight;
+
+function getAdjustedY(thisValue) {
+  /*
+    normally you would make the percent = thisValue / maxValue
+    this would cause the maxValue to touch the top of the graph
+    the last item in chartLines should be a value slightly higher than maxValue
+    so divide thisValue by the slightly higher maxValue so that maxValue will be
+      noticeably below the top of the graph
+  */
+  let percent = thisValue / chartLines[chartLines.length - 1];
+
+  // multiply percent (currently a decimal) by chartHeight to get a height relative to chartHeight
+  return percent * chartHeight;
 }
 
 function drawBar(elementToAppendTo, width, height, className, x, y) {
