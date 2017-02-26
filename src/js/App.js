@@ -78,14 +78,35 @@ document.addEventListener('DOMContentLoaded', function() {
              .on('mouseout', tooltip.mouseoutHandler);
 
   // add background rect for aesthetics
-  drawBar(g, barWidth, chartHeight, 'bg', getBarX, 0);
+  drawBar(
+    g,             // elementToAppendTo
+    barWidth,      // width
+    chartHeight,   // height
+    'background',  // class
+    getBarX,       // x
+    0              // y
+  );
 
   // add a rect to represent the value
-  drawBar(g, barWidth, getBarHeight, 'bar', getBarX, (d) => chartHeight - getBarHeight(d));
+  drawBar(
+    g,
+    barWidth,
+    getBarHeight,
+    'bar',
+    getBarX,
+    (d) => chartHeight - getBarHeight(d)
+  );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
-  // this way the entire column will highlight
-  drawBar(g, barWidth, chartHeight, 'fg', getBarX, 0);
+  // this way the entire column will highlight on hover
+  drawBar(
+    g,
+    barWidth,
+    chartHeight,
+    'foreground',
+    getBarX,
+    0
+  );
 });
 
 function getBarX(d, i) {

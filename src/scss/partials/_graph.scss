@@ -2,18 +2,19 @@ div#graph-container {
   text-align: center;
 }
 svg#graph {
+  rect.background {
+    fill: lighten(#d3d3d3, 10%);
+  }
   rect.bar {
     fill: $graphBarColor;
   }
-  rect.bg {
-    fill: #d3d3d3;
-  }
-  rect.fg {
+  rect.foreground {
     fill-opacity: 0;
-  }
-  rect.fg:hover {
-    fill: black;
-    fill-opacity: 0.1;
+    
+    &:hover {
+      fill: black;
+      fill-opacity: 0.1;
+    }
   }
 
   text.label {
