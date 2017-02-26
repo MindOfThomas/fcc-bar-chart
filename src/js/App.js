@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .append('svg')
               .attr('id', 'graph')
               .attr('width', margins.left + (values.length * barWidth))
-              .attr('height', chartHeight + margins.bottom)
+              .attr('height', chartHeight + margins.bottom);
 
   svg.append('text')
      .attr('class', 'label')
@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
              .attr('y', 0)
              .on('mouseover', function(d) {
                let money = d * 1000000000; // convert to billions
-               money = numeral(money).format('$0.00a')
-               tooltip.mouseoverHandler(money)
+               money = numeral(money).format('$0.00a');
+               tooltip.mouseoverHandler(money);
              })
              .on('mousemove', tooltip.mousemoveHandler)
              .on('mouseout', tooltip.mouseoutHandler);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'bg')
-   .attr('x', (d, i) => margins.left + (i * barWidth))
+   .attr('x', (d, i) => margins.left + (i * barWidth));
 
   // add a rect to represent the value
   g.append('rect')
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', (d) => (d / maxValue) * chartHeight)
    .attr('x', (d, i) => margins.left + (i * barWidth))
-   .attr('y', (d) => chartHeight - ((d / maxValue) * chartHeight))
+   .attr('y', (d) => chartHeight - ((d / maxValue) * chartHeight));
 
   // add a foreground rect that will be transparent unless the user is hovering on it
   // this way the entire column will highlight
@@ -96,5 +96,5 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'fg')
-   .attr('x', (d, i) => margins.left + (i * barWidth))
+   .attr('x', (d, i) => margins.left + (i * barWidth));
 });
