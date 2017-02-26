@@ -42,24 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
               .attr('width', margins.left + (values.length * barWidth))
               .attr('height', chartHeight + margins.bottom);
 
-  // add x-axis label
-  drawLabel(
-    svg,                                            // elementToAppendTo
-    margins.left + (barWidth * values.length) / 2,  // x
-    chartHeight + margins.bottom,                   // y
-    'Time'                                          // text
-  );
-
-  // add y-axis label
-  drawLabel(
-    svg,
-    '-' + (chartHeight / 2),  // x (but acting as y because this label is rotated -90deg)
-    margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
-    'Value',
-    'rotate(-90)'             // transform property
-  );
-
-
   // add a g to group our rects
   let g = svg.selectAll('g')
              .data(values)
@@ -106,6 +88,23 @@ document.addEventListener('DOMContentLoaded', function() {
     'foreground',
     getBarX,
     0
+  );
+
+  // add x-axis label
+  drawLabel(
+    svg,                                            // elementToAppendTo
+    getChartWidth() / 2,  // x
+    chartHeight + margins.bottom,                   // y
+    'Time'                                          // text
+  );
+
+  // add y-axis label
+  drawLabel(
+    svg,
+    '-' + (chartHeight / 2),  // x (but acting as y because this label is rotated -90deg)
+    margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
+    'Value',
+    'rotate(-90)'             // transform property
   );
 });
 
