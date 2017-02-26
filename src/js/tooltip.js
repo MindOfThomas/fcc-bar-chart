@@ -30,8 +30,8 @@ module.exports = {
     let tooltip = document.getElementById('tooltip');
 
     let tooltipHeight = tooltip.offsetHeight;
-    let newTop = (event.pageY - (tooltipHeight / 2)) + 'px';
-    let newLeft = (event.pageX + 12) + 'px';
+    let newTop = (d3.event.pageY - (tooltipHeight / 2)) + 'px';
+    let newLeft = (d3.event.pageX + 12) + 'px';
 
     tooltip.style.top = newTop;
     tooltip.style.left = newLeft;
