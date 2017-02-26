@@ -10,6 +10,7 @@ const data = require('./data.json');
 const dates = data.data.map((val) => val[0]);
 const values = data.data.map((val) => val[1]);
 const maxValue = Math.max(...values);
+const chartLines = generateLineNums(5);
 
 numeral.register('locale', 'en-capital', {
     delimiters: {
@@ -106,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
     'Value',
     'rotate(-90)'             // transform property
   );
+
+  drawLines(svg);
 });
 
 function getChartWidth() {
@@ -149,4 +152,42 @@ function drawLabel(elementToAppendTo, x, y, text, transform) {
   if (transform) {
     label.attr('transform', transform);
   }
+}
+
+function generateLineNums(desiredNumberOfLines) {
+  let chartMax = maxValue + (maxValue * 0.1);
+  let lines = [];
+
+  let step = chartMax / desiredNumberOfLines;
+  for(var i = 0; i < desiredNumberOfLines; i++) {
+    let thisStep = lines[i - 1] !== undefined ? lines[i - 1] + step : step;
+    lines.push(Math.ceil(thisStep));
+  }
+
+  return lines;
+}
+
+function drawLines(elementToAppendTo) {
+  for (var i = 0; i < chartLines.length; i++) {
+    let lineValue = chartLines[i];
+    let y = getAdjustedY(lineValue);
+
+    // if this line's y coord is at or above the chart's height then don't draw this line
+    if (y >= chartHeight) continue;
+
+    drawLine(
+      elementToAppendTo,  // elementToAppendTo
+      margins.left / 2,   // x1 (don't draw the line all the way through the margin)
+      y,                  // y1
+      getChartWidth(),    // x2
+      y                   // y2
+    );
+  }
+}
+function drawLine(elementToAppendTo, x1, y1, x2, y2) {
+  elementToAppendTo.append('line')
+                   .attr('x1', x1)
+                   .attr('y1', y1)
+                   .attr('x2', x2)
+                   .attr('y2', y2);
 }

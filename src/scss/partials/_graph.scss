@@ -10,7 +10,7 @@ svg#graph {
   }
   rect.foreground {
     fill-opacity: 0;
-    
+
     &:hover {
       fill: black;
       fill-opacity: 0.1;
@@ -19,5 +19,13 @@ svg#graph {
 
   text.label {
     cursor: default;
+  }
+
+  line {
+    pointer-events: none;
+
+    stroke: black;
+    stroke-width: 1;
+    stroke-opacity: 0.2;
   }
 }
