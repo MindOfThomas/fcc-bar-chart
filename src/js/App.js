@@ -1,4 +1,4 @@
-const barWidth = 3;
+const barWidth = 2;
 const chartHeight = 350;
 const margins = {bottom: 25, left: 25};
 
