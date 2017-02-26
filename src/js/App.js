@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
               .append('svg')
               .attr('id', 'graph')
               .attr('width', values.length * barWidth)
+              .attr('height', chartHeight)
               .selectAll('g')
               .data(values)
               .enter();
