@@ -3,7 +3,7 @@ div#graph-container {
 }
 svg#graph {
   rect.background {
-    fill: lighten(#d3d3d3, 10%);
+    fill: lighten(#d3d3d3, 15%);
   }
   rect.bar {
     fill: $graphBarColor;
