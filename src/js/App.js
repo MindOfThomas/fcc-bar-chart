@@ -43,21 +43,21 @@ document.addEventListener('DOMContentLoaded', function() {
               .attr('height', chartHeight + margins.bottom);
 
   // add x-axis label
-  svg.append('text')
-     .attr('class', 'label')
-     .attr('text-anchor', 'middle')
-     .attr('x', margins.left + (barWidth * values.length) / 2)
-     .attr('y', chartHeight + margins.bottom)
-     .text('Time');
+  drawLabel(
+    svg,                                            // elementToAppendTo
+    margins.left + (barWidth * values.length) / 2,  // x
+    chartHeight + margins.bottom,                   // y
+    'Time'                                          // text
+  );
 
   // add y-axis label
-  svg.append('text')
-     .attr('class', 'label')
-     .attr('text-anchor', 'middle')
-     .attr('x', '-' + (chartHeight / 2)) // x and y are flipped because of the rotation
-     .attr('y', margins.bottom / 2) // this might not always put the label within the chart's bounds
-     .attr('transform', 'rotate(-90)')
-     .text('Value');
+  drawLabel(
+    svg,
+    '-' + (chartHeight / 2),  // x (but acting as y because this label is rotated -90deg)
+    margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
+    'Value',
+    'rotate(-90)'             // transform property
+  );
 
 
   // add a g to group our rects
@@ -102,4 +102,16 @@ function drawBar(elementToAppendTo, width, height, className, x, y) {
                    .attr('class', className)
                    .attr('x', x)
                    .attr('y', y);
+}
+
+function drawLabel(elementToAppendTo, x, y, text, transform) {
+  let label = elementToAppendTo.append('text')
+                               .attr('class', 'label')
+                               .attr('text-anchor', 'middle')
+                               .attr('x', x)
+                               .attr('y', y)
+                               .text(text);
+  if (transform) {
+    label.attr('transform', transform);
+  }
 }
