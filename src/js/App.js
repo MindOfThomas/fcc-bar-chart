@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
              .append('g')
              .attr('width', barWidth)
              .attr('height', chartHeight)
-             .attr('x', (d, i) => i * barWidth)
+             .attr('x', getBarWidth)
              .attr('y', 0)
              .on('mouseover', function(d) {
                let money = d * 1000000000; // convert to billions
@@ -80,15 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'bg')
-   .attr('x', (d, i) => margins.left + (i * barWidth));
+   .attr('x', getBarWidth);
 
   // add a rect to represent the value
   g.append('rect')
    .attr('class', 'bar')
    .attr('width', barWidth)
-   .attr('height', (d) => (d / maxValue) * chartHeight)
-   .attr('x', (d, i) => margins.left + (i * barWidth))
-   .attr('y', (d) => chartHeight - ((d / maxValue) * chartHeight));
+   .attr('height', getBarHeight)
+   .attr('x', getBarWidth)
+   .attr( 'y', (d) => chartHeight - getBarHeight(d) );
 
   // add a foreground rect that will be transparent unless the user is hovering on it
   // this way the entire column will highlight
@@ -96,5 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
    .attr('width', barWidth)
    .attr('height', chartHeight)
    .attr('class', 'fg')
-   .attr('x', (d, i) => margins.left + (i * barWidth));
+   .attr('x', getBarWidth);
 });
+
+function getBarWidth(d, i) {
+  return margins.left + (i * barWidth);
+}
+function getBarHeight(d) {
+  return (d / maxValue) * chartHeight;
+}
