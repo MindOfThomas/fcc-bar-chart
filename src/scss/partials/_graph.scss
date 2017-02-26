@@ -1,16 +1,22 @@
 div#graph-container {
   text-align: center;
 }
-svg#graph rect.bar {
-  fill: $graphBarColor;
-}
-svg#graph rect.bg {
-  fill: #d3d3d3;
-}
-svg#graph rect.fg {
-  fill-opacity: 0;
-}
-svg#graph .fg:hover {
-  fill: black;
-  fill-opacity: 0.1;
+svg#graph {
+  rect.bar {
+    fill: $graphBarColor;
+  }
+  rect.bg {
+    fill: #d3d3d3;
+  }
+  rect.fg {
+    fill-opacity: 0;
+  }
+  rect.fg:hover {
+    fill: black;
+    fill-opacity: 0.1;
+  }
+
+  text.label {
+    cursor: default;
+  }
 }
