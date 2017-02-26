@@ -1,9 +1,16 @@
 div#graph-container {
   text-align: center;
 }
-svg#graph rect {
+svg#graph rect.bar {
   fill: $graphBarColor;
 }
-svg#graph rect:hover {
+svg#graph rect.bg {
+  fill: lightgray;
+}
+svg#graph rect.fg {
+  fill-opacity: 0;
+}
+svg#graph .fg:hover {
   fill: darken($graphBarColor, 10%);
+  fill-opacity: 1;
 }
