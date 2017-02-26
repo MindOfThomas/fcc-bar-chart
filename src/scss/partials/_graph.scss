@@ -5,12 +5,12 @@ svg#graph rect.bar {
   fill: $graphBarColor;
 }
 svg#graph rect.bg {
-  fill: lightgray;
+  fill: #d3d3d3;
 }
 svg#graph rect.fg {
   fill-opacity: 0;
 }
 svg#graph .fg:hover {
-  fill: darken($graphBarColor, 10%);
-  fill-opacity: 1;
+  fill: black;
+  fill-opacity: 0.1;
 }
