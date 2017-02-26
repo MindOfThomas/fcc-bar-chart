@@ -1,0 +1,9 @@
+div#graph-container {
+  text-align: center;
+}
+svg#graph rect {
+  fill: $graphBarColor;
+}
+svg#graph rect:hover {
+  fill: darken($graphBarColor, 10%);
+}
