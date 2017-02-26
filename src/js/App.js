@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let svg = d3.select('#graph-container')
               .append('svg')
               .attr('id', 'graph')
-              .attr('width', margins.left + (values.length * barWidth))
+              .attr('width', getChartWidth())
               .attr('height', chartHeight + margins.bottom);
 
   // add a g to group our rects
@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
     'rotate(-90)'             // transform property
   );
 });
+
+function getChartWidth() {
+  return margins.left + (barWidth * values.length);
+}
 
 function getBarX(d, i) {
   return margins.left + (i * barWidth);
