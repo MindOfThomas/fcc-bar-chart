@@ -1,6 +1,6 @@
 const barWidth = 2;
 const chartHeight = 350;
-const margins = {bottom: 25, left: 25};
+const margins = {bottom: 25, left: 50};
 
 const d3 = require('d3');
 const numeral = require('numeral');
