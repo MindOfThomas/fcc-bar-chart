@@ -3,12 +3,34 @@ const chartHeight = 350;
 const margins = {bottom: 25, left: 25};
 
 const d3 = require('d3');
+const numeral = require('numeral');
 const tooltip = require('./tooltip.js');
 const data = require('./data.json');
 
 const dates = data.data.map((val) => val[0]);
 const values = data.data.map((val) => val[1]);
 const maxValue = Math.max(...values);
+
+numeral.register('locale', 'en-capital', {
+    delimiters: {
+        thousands: ',',
+        decimal: '.'
+    },
+    abbreviations: {
+        thousand: 'K',
+        million: 'M',
+        billion: 'B',
+        trillion: 'T'
+    },
+    ordinal: function(e) {
+      var t = e % 10;
+      return~~ (e % 100 / 10) === 1 ? 'th' : t === 1 ? 'st' : t === 2 ? 'nd' : t === 3 ? 'rd' : 'th'
+    },
+    currency: {
+      symbol: '$'
+    }
+});
+numeral.locale('en-capital');
 
 document.addEventListener('DOMContentLoaded', function() {
   // init tooltip, which will create a hidden div#tooltip
@@ -45,7 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
              .attr('height', chartHeight)
              .attr('x', (d, i) => i * barWidth)
              .attr('y', 0)
-             .on('mouseover', tooltip.mouseoverHandler)
+             .on('mouseover', function(d) {
+               let money = d * 1000000000; // convert to billions
+               money = numeral(money).format('$0.00a')
+               tooltip.mouseoverHandler(money)
+             })
              .on('mousemove', tooltip.mousemoveHandler)
              .on('mouseout', tooltip.mouseoutHandler);
 
