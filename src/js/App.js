@@ -1,5 +1,5 @@
 const barWidth = 3;
-const chartHeight = 100;
+const chartHeight = 350;
 
 const d3 = require('d3');
 const tooltip = require('./tooltip.js');
