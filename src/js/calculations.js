@@ -1,5 +1,7 @@
 const info = require('./info.js');
 
+const moment = require('moment');
+
 module.exports = {
   chartAdjWidth: function chartAdjWidth() {
     // get chart width by multiplying bar width by the number of data items
@@ -22,12 +24,32 @@ module.exports = {
       so divide value by the slightly higher info.maxValue so that info.maxValue will be
         noticeably below the top of the graph
     */
-    let percent = value / info.chart.lines[info.chart.lines.length - 1];
+    let percent = value / info.chart.linesY[info.chart.linesY.length - 1];
 
     // multiply percent (currently a decimal) by chartHeight to get a height relative to chartHeight
     return percent * info.chart.height;
   },
-  generateLineNums: function generateLineNums(desiredNumberOfLines) {
+  generateLinesX: function generateLinesX() {
+    let lines = [];
+
+    let yearsDup = info.dates.map((val) => moment(val).year()); //make an array of years
+    let years = yearsDup.filter((val, i, arr) => arr.indexOf(val) === i); // remove duplicate years
+
+    let step = 5; // cheating here, already know what the step should be
+
+    // loop through the total number of lines (step * Math.ceil(years.length))
+    // add step to year each loop, starting at 1950
+    for (var year = 1950; year <= years[years.length - 1]; year += step) {
+
+      // get the x-position using the index of this year in the info.dates array
+      let x = this.barX(null, yearsDup.indexOf(year));
+
+      lines.push({x, year});
+    }
+
+    return lines; // array of objects containing x-position and year for each line
+  },
+  generateLinesY: function generateLinesY(desiredNumberOfLines) {
     // get an adjusted info.maxValue (110% of info.maxValue)
     let chartMax = info.maxValue + (info.maxValue * 0.1);
     let lines = [];
@@ -41,4 +63,4 @@ module.exports = {
 
     return lines;
   }
-}
+};

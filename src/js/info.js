@@ -14,7 +14,8 @@ module.exports = {
   chart: {
     height: 350,
     width: null,
-    lines: []
+    linesX: [],
+    linesY: []
   },
   bar: {
     width: 2

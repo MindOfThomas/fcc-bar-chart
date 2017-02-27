@@ -1,9 +1,11 @@
 const info = require('./info.js');
 const draw = require('./draw.js');
 const calc = require('./calculations.js');
-info.chart.lines = calc.generateLineNums(5);
+info.chart.linesX = calc.generateLinesX();
+info.chart.linesY = calc.generateLinesY(5);
 
 const d3 = require('d3');
+const moment = require('moment');
 
 const numeral = require('numeral');
 numeral.register('locale', 'en-capital', {
@@ -85,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
   );
 
   // BEGIN DRAWING LINES
-  for (var i = 0; i < info.chart.lines.length; i++) {
-    let lineValue = info.chart.lines[i];
+  for (var i = 0; i < info.chart.linesY.length; i++) {
+    let lineValue = info.chart.linesY[i];
     let y = info.chart.height - calc.adjY(lineValue);
 
     // if this line's y coord is at or above the chart's height then don't draw this line
@@ -126,9 +128,30 @@ document.addEventListener('DOMContentLoaded', function() {
   );
   // END DRAWING LINES
 
-  // LINE LABELS
-  for (var i = 0; i < info.chart.lines.length; i++) {
-    let lineValue = info.chart.lines[i];
+  // START LINE LABELS
+  // X-AXIS LABELS
+  for (let i = 0; i < info.chart.linesX.length; i++) {
+    let line = info.chart.linesX[i];
+    let y = info.chart.height + info.margins.bottom * 0.3;
+
+    // if this x coord is at or past the chart's width then don't draw this label
+    if (line.x >= calc.chartAdjWidth() || line.x <= 0) continue;
+
+    draw.label(
+      svg,                                  // elementToAppendTo
+      line.x,              // x (don't draw the line all the way through the margin)
+      y,                                    // y
+      line.year,  // text
+      '',                                   // transform (don't need to transform)
+      'end',                                // text-anchor
+      'middle',                             // alignment-baseline
+      'axis-label'
+    );
+  }
+
+  // Y-AXIS LABELS
+  for (let i = 0; i < info.chart.linesY.length; i++) {
+    let lineValue = info.chart.linesY[i];
     let y = info.chart.height - calc.adjY(lineValue);
 
     // if this line's y coord is at or above the chart's height then don't draw this label
@@ -146,4 +169,5 @@ document.addEventListener('DOMContentLoaded', function() {
       'axis-label'
     );
   }
+  // END LINE LABELS
 });
