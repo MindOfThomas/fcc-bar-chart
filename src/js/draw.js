@@ -4,6 +4,7 @@ const tooltip = require('./tooltip.js');
 
 const d3 = require('d3');
 const numeral = require('numeral');
+const moment = require('moment');
 
 module.exports = {
   svg: function svg() {
@@ -25,10 +26,8 @@ module.exports = {
                              .attr('height', info.chart.height)
                              .attr('x', calc.barX)
                              .attr('y', 0)
-                             .on('mouseover', function(d) {
-                               let money = d * 1000000000; // convert to billions
-                               money = numeral(money).format('$0.00a');
-                               tooltip.mouseoverHandler(money);
+                             .on('mouseover', function(d, i) {
+                               tooltip.mouseoverHandler(formatTooltip(d, i), true);
                              })
                              .on('mousemove', tooltip.mousemoveHandler)
                              .on('mouseout', tooltip.mouseoutHandler);
@@ -68,4 +67,13 @@ module.exports = {
                      .attr('y2', y2)
                      .attr('class', className);
   }
+};
+
+function formatTooltip(d, i) {
+  let money = d * 1000000000; // convert to billions
+  money = numeral(money).format('$0.00a');
+
+  let date = moment(info.dates[i]).format('YYYY - MMMM');
+
+  return money + '<br>' + date;
 }

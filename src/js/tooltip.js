@@ -21,12 +21,16 @@ module.exports = {
 
     document.body.appendChild(tooltipDiv);
   },
-  mouseoverHandler: function(d) {
+  mouseoverHandler: function(text, html) {
     let tooltip = document.getElementById('tooltip');
     let tooltipSpan = document.querySelector('#tooltip span');
 
-    // update the tooltip's text
-    tooltipSpan.textContent = d;
+    // update the tooltip's text (or html)
+    if (html) {
+      tooltipSpan.innerHTML = text;
+    } else {
+      tooltipSpan.textContent = text;
+    }
 
     // make the tooltip visible
     tooltip.style.visibility = 'visible';
