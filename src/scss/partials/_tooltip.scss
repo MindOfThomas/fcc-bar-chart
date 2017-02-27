@@ -1,4 +1,9 @@
 div#tooltip {
+  position: absolute;
+  z-index: 10;
+
+  visibility: hidden;
+
   padding: 0.7em;
 
   background-color: $lightMainColor;

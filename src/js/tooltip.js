@@ -1,26 +1,6 @@
 const d3 = require('d3');
 
 module.exports = {
-  add: function() {
-    let tooltipDiv = document.createElement('div');
-
-    tooltipDiv.id = 'tooltip';
-    tooltipDiv.style.position = 'absolute';
-    tooltipDiv.style.zIndex = '10';
-    tooltipDiv.style.visibility = 'hidden';
-
-    // create a div that will be styled as left-pointing arrow to the left of div#tooltip
-    let arrowDiv = document.createElement('div');
-    arrowDiv.className = 'arrow';
-
-    // create a span that will hold the tooltip's text
-    let span = document.createElement('span');
-
-    tooltipDiv.appendChild(arrowDiv);
-    tooltipDiv.appendChild(span);
-
-    document.body.appendChild(tooltipDiv);
-  },
   mouseoverHandler: function(text, html) {
     let tooltip = document.getElementById('tooltip');
     let tooltipSpan = document.querySelector('#tooltip span');

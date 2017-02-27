@@ -8,9 +8,6 @@ const moment = require('moment');
 
 module.exports = {
   svg: function svg() {
-    // init tooltip, which will create a hidden div#tooltip
-    tooltip.add();
-
     return d3.select('#graph-container')
               .append('svg')
               .attr('id', 'graph')
