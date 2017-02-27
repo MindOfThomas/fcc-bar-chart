@@ -23,7 +23,7 @@ module.exports = {
     // new top position is half tooltipHeight subtracted from the y-position of the mouse
     let newTop = (d3.event.pageY - (tooltipHeight / 2)) + 'px';
 
-    // new left position is x-position of mouse plus 12 (the width of the div.arrow child element)
+    // new left position is x-position of mouse plus the width of the div.arrow child element
     let newLeft = (d3.event.pageX + 12) + 'px';
 
     // set the tooltip's new position
