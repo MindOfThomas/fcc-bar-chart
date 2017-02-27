@@ -10,6 +10,7 @@ module.exports = {
   svg: function svg() {
     return d3.select('#graph-container')
               .append('svg')
+              .attr('xmlns', 'http://www.w3.org/2000/svg')
               .attr('id', 'graph')
               .attr('width', calc.chartAdjWidth())     // includes margins
               .attr('height', calc.chartAdjHeight());
