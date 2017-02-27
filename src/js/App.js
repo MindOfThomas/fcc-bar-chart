@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     svg,                       // elementToAppendTo
     calc.chartAdjWidth() / 2,  // x
     calc.chartAdjHeight(),     // y
-    'Time',                     // text
+    'Time',                    // text
     '',
     'start'
   );
@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
   draw.label(
     svg,
     '-' + (info.chart.height / 2),  // x (but acting as y because this label is rotated -90deg)
-    info.margins.bottom / 2,       // y (but acting as x because this label is rotated -90deg)
+    info.margins.bottom / 2,        // y (but acting as x because this label is rotated -90deg)
     'Value',
-    'rotate(-90)'             // transform property
+    'rotate(-90)'                   // transform property
   );
 
   // BEGIN DRAWING LINES
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let xaxisX1 = info.margins.left;
   let xaxisX2 = calc.chartAdjWidth();
   draw.line(
-    svg,  // elementToAppendTo
+    svg,                // elementToAppendTo
     xaxisX1,            // x1
     xaxisY,             // y1
     xaxisX2,            // x2
@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Y-AXIS LINE
   let yaxisX = info.margins.left; // don't draw the line all the way through the margin
   draw.line(
-    svg,  // elementToAppendTo
+    svg,                // elementToAppendTo
     yaxisX,             // x1
     0,                  // y1
     yaxisX,             // x2
-    info.chart.height,        // y2
+    info.chart.height,  // y2
     'axis'
   );
   // END DRAWING LINES
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     lineValue *= 1000000000; // convert to billions
     draw.label(
-      svg,                    // elementToAppendTo
+      svg,                                  // elementToAppendTo
       info.margins.left * 0.8,              // x (don't draw the line all the way through the margin)
       y,                                    // y
       numeral(lineValue).format('$0.00a'),  // text

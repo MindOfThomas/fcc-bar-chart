@@ -13,7 +13,7 @@ module.exports = {
     return d3.select('#graph-container')
               .append('svg')
               .attr('id', 'graph')
-              .attr('width', calc.chartAdjWidth())
+              .attr('width', calc.chartAdjWidth())     // includes margins
               .attr('height', calc.chartAdjHeight());
   },
   group: function group(elementToAppendTo) {
@@ -42,12 +42,16 @@ module.exports = {
                      .attr('y', y);
   },
   label: function label(elementToAppendTo, x, y, text, transform, anchor, alignmentBaseline, className) {
+    className = className || 'label';
+    anchor = anchor || 'middle';
+
     let labelEl = elementToAppendTo.append('text')
-                                   .attr('class', className || 'label')
-                                   .attr('text-anchor', anchor || 'middle')
+                                   .attr('class', className)
+                                   .attr('text-anchor', anchor)
                                    .attr('x', x)
                                    .attr('y', y)
                                    .text(text);
+
     if (transform) {
       labelEl.attr('transform', transform);
     }

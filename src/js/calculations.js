@@ -2,12 +2,16 @@ const info = require('./info.js');
 
 module.exports = {
   chartAdjWidth: function chartAdjWidth() {
+    // get chart width by multiplying bar width by the number of data items
+    // then add horizontal margins
     return info.margins.left + (info.bar.width * info.values.length);
   },
   chartAdjHeight: function chartAdjHeight() {
+    // add vetical margins to chart height
     return info.chart.height + info.margins.bottom;
   },
   barX: function barX(value, index) {
+    // index * bar width will get the x position, then add horizontal margins
     return info.margins.left + (index * info.bar.width);
   },
   adjY: function adjY(value) {
