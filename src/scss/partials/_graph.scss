@@ -2,6 +2,10 @@ div#graph-container {
   text-align: center;
 }
 svg#graph {
+  padding: 1.5em;
+  border: 1px solid $darkMainColor;
+  border-radius: 0.5em;
+
   rect.background {
     fill: lighten(#d3d3d3, 15%);
   }
