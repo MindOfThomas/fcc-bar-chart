@@ -8,7 +8,7 @@ const values = data.data.map((val) => val[1]);
 
 module.exports = {
   margins: {
-    bottom: 40,
+    bottom: 25,
     left: 65,
     right: 10
   },

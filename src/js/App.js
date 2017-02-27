@@ -76,11 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (line.x >= calc.chartAdjWidth() || line.x <= 0) continue;
 
     draw.line(
-      svg,                                         // elementToAppendTo
-      line.x,                                      // x1 (don't draw the line all the way through the margin)
-      info.chart.height,                           // y1
-      line.x,                                      // x2
-      info.chart.height + info.margins.left * 0.1  // y2
+      svg,                                            // elementToAppendTo
+      line.x,                                         // x1 (don't draw the line all the way through the margin)
+      info.chart.height,                              // y1
+      line.x,                                         // x2
+      info.chart.height + info.margins.bottom * 0.2,  // y2
+      'axis'
     );
   }
 
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // X-AXIS LABELS
   for (let i = 0; i < info.chart.linesX.length; i++) {
     let line = info.chart.linesX[i];
-    let y = info.chart.height + info.margins.bottom * 0.3;
+    let y = info.chart.height + info.margins.bottom * 0.5;
 
     // if this x coord is at or past the chart's width then don't draw this label
     if (line.x >= calc.chartAdjWidth() || line.x <= 0) continue;
