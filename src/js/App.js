@@ -81,6 +81,67 @@ document.addEventListener('DOMContentLoaded', function() {
     'rotate(-90)'             // transform property
   );
 
-  draw.lines(svg);
-  draw.lineLabels(svg);
+  // BEGIN DRAWING LINES
+  for (var i = 0; i < info.chart.lines.length; i++) {
+    let lineValue = info.chart.lines[i];
+    let y = info.chart.height - calc.adjY(lineValue);
+
+    // if this line's y coord is at or above the chart's height then don't draw this line
+    if (y >= info.chart.height || y <= 0) continue;
+
+    draw.line(
+      svg,                      // elementToAppendTo
+      info.margins.left * 0.8,  // x1 (don't draw the line all the way through the margin)
+      y,                        // y1
+      calc.chartAdjWidth(),     // x2
+      y                         // y2
+    );
+  }
+
+  // add x-axis line
+  let xaxisY = info.chart.height;
+  let xaxisX1 = info.margins.left;
+  let xaxisX2 = calc.chartAdjWidth();
+  draw.line(
+    svg,  // elementToAppendTo
+    xaxisX1,            // x1
+    xaxisY,             // y1
+    xaxisX2,            // x2
+    xaxisY,             // y2
+    'axis'
+  );
+
+  // add y-axis line
+  let yaxisX = info.margins.left; // don't draw the line all the way through the margin
+  draw.line(
+    svg,  // elementToAppendTo
+    yaxisX,             // x1
+    0,                  // y1
+    yaxisX,             // x2
+    info.chart.height,        // y2
+    'axis'
+  );
+  // END DRAWING LINES
+
+  // BEGIN DRAWING LINE LABELS
+  for (var i = 0; i < info.chart.lines.length; i++) {
+    let lineValue = info.chart.lines[i];
+    let y = info.chart.height - calc.adjY(lineValue);
+
+    // if this line's y coord is at or above the chart's height then don't draw this label
+    if (y >= info.chart.height || y <= 0) continue;
+
+    lineValue *= 1000000000; // convert to billions
+    draw.label(
+      svg,                    // elementToAppendTo
+      info.margins.left * 0.8,              // x (don't draw the line all the way through the margin)
+      y,                                    // y
+      numeral(lineValue).format('$0.00a'),  // text
+      '',                                   // transform (don't need to transform)
+      'end',                                // text-anchor
+      'middle',                             // alignment-baseline
+      'axis-label'
+    );
+  }
+  // END DRAWING LINE LABELS
 });
