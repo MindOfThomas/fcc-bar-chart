@@ -1,7 +1,38 @@
 const info = require('./info.js');
 const calc = require('./calculations.js');
+const tooltip = require('./tooltip.js');
+
+const d3 = require('d3');
+const numeral = require('numeral');
 
 module.exports = {
+  svg: function() {
+    // init tooltip, which will create a hidden div#tooltip
+    tooltip.add();
+
+    return d3.select('#graph-container')
+              .append('svg')
+              .attr('id', 'graph')
+              .attr('width', calc.chartAdjWidth())
+              .attr('height', calc.chartAdjHeight());
+  },
+  group: function(elementToAppendTo) {
+    return  elementToAppendTo.selectAll('g')
+                             .data(info.values)
+                             .enter()
+                             .append('g')
+                             .attr('width', info.bar.width)
+                             .attr('height', info.chart.height)
+                             .attr('x', calc.barX)
+                             .attr('y', 0)
+                             .on('mouseover', function(d) {
+                               let money = d * 1000000000; // convert to billions
+                               money = numeral(money).format('$0.00a');
+                               tooltip.mouseoverHandler(money);
+                             })
+                             .on('mousemove', tooltip.mousemoveHandler)
+                             .on('mouseout', tooltip.mouseoutHandler);
+  },
   bar: function(elementToAppendTo, width, height, className, x, y) {
     elementToAppendTo.append('rect')
                      .attr('width', width)

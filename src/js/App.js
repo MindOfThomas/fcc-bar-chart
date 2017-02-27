@@ -4,9 +4,8 @@ const calc = require('./calculations.js');
 info.chart.lines = calc.generateLineNums(5);
 
 const d3 = require('d3');
-const numeral = require('numeral');
-const tooltip = require('./tooltip.js');
 
+const numeral = require('numeral');
 numeral.register('locale', 'en-capital', {
     delimiters: {
         thousands: ',',
@@ -29,31 +28,10 @@ numeral.register('locale', 'en-capital', {
 numeral.locale('en-capital');
 
 document.addEventListener('DOMContentLoaded', function() {
-  // init tooltip, which will create a hidden div#tooltip
-  tooltip.add();
-
-  let svg = d3.select('#graph-container')
-              .append('svg')
-              .attr('id', 'graph')
-              .attr('width', calc.chartAdjWidth())
-              .attr('height', calc.chartAdjHeight());
+  let svg = draw.svg();
 
   // add a g to group our rects
-  let g = svg.selectAll('g')
-             .data(info.values)
-             .enter()
-             .append('g')
-             .attr('width', info.bar.width)
-             .attr('height', info.chart.height)
-             .attr('x', calc.barX)
-             .attr('y', 0)
-             .on('mouseover', function(d) {
-               let money = d * 1000000000; // convert to billions
-               money = numeral(money).format('$0.00a');
-               tooltip.mouseoverHandler(money);
-             })
-             .on('mousemove', tooltip.mousemoveHandler)
-             .on('mouseout', tooltip.mouseoutHandler);
+  let g = draw.group(svg);
 
   // add background rect for aesthetics
   draw.bar(
