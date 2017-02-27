@@ -6,7 +6,7 @@ const d3 = require('d3');
 const numeral = require('numeral');
 
 module.exports = {
-  svg: function() {
+  svg: function svg() {
     // init tooltip, which will create a hidden div#tooltip
     tooltip.add();
 
@@ -16,7 +16,7 @@ module.exports = {
               .attr('width', calc.chartAdjWidth())
               .attr('height', calc.chartAdjHeight());
   },
-  group: function(elementToAppendTo) {
+  group: function group(elementToAppendTo) {
     return  elementToAppendTo.selectAll('g')
                              .data(info.values)
                              .enter()
@@ -33,7 +33,7 @@ module.exports = {
                              .on('mousemove', tooltip.mousemoveHandler)
                              .on('mouseout', tooltip.mouseoutHandler);
   },
-  bar: function(elementToAppendTo, width, height, className, x, y) {
+  bar: function bar(elementToAppendTo, width, height, className, x, y) {
     elementToAppendTo.append('rect')
                      .attr('width', width)
                      .attr('height', height)
@@ -41,7 +41,7 @@ module.exports = {
                      .attr('x', x)
                      .attr('y', y);
   },
-  label: function(elementToAppendTo, x, y, text, transform, anchor, alignmentBaseline, className) {
+  label: function label(elementToAppendTo, x, y, text, transform, anchor, alignmentBaseline, className) {
     let label = elementToAppendTo.append('text')
                                  .attr('class', className || 'label')
                                  .attr('text-anchor', anchor || 'middle')
@@ -55,7 +55,7 @@ module.exports = {
       label.attr('alignment-baseline', alignmentBaseline);
     }
   },
-  line: function(elementToAppendTo, x1, y1, x2, y2, className) {
+  line: function line(elementToAppendTo, x1, y1, x2, y2, className) {
     className = className || '';
     elementToAppendTo.append('line')
                      .attr('x1', x1)

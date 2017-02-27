@@ -1,16 +1,16 @@
 const info = require('./info.js');
 
 module.exports = {
-  chartAdjWidth: function() {
+  chartAdjWidth: function chartAdjWidth() {
     return info.margins.left + (info.bar.width * info.values.length);
   },
-  chartAdjHeight: function() {
+  chartAdjHeight: function chartAdjHeight() {
     return info.chart.height + info.margins.bottom;
   },
-  barX: function(value, index) {
+  barX: function barX(value, index) {
     return info.margins.left + (index * info.bar.width);
   },
-  adjY: function(value) {
+  adjY: function adjY(value) {
     /*
       normally you would make the percent = value / info.maxValue
       this would cause the info.maxValue to touch the top of the graph
@@ -23,7 +23,7 @@ module.exports = {
     // multiply percent (currently a decimal) by chartHeight to get a height relative to chartHeight
     return percent * info.chart.height;
   },
-  generateLineNums: function(desiredNumberOfLines) {
+  generateLineNums: function generateLineNums(desiredNumberOfLines) {
     // get an adjusted info.maxValue (110% of info.maxValue)
     let chartMax = info.maxValue + (info.maxValue * 0.1);
     let lines = [];
