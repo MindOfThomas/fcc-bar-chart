@@ -15,9 +15,9 @@ numeral.register('locale', 'en-capital', {
     },
     abbreviations: {
         thousand: 'K',
-        million: 'M',
-        billion: 'B',
-        trillion: 'T'
+        million: 'Million',
+        billion: 'Billion',
+        trillion: 'Trillion'
     },
     ordinal: function(e) {
       var t = e % 10;
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
       svg,                                  // elementToAppendTo
       info.margins.left * 0.8,              // x (don't draw the line all the way through the margin)
       y,                                    // y
-      numeral(lineValue).format('$0.00a'),  // text
+      numeral(lineValue).format('$0.00 a'),  // text
       '',                                   // transform (don't need to transform)
       'end',                                // text-anchor
       'middle',                             // alignment-baseline

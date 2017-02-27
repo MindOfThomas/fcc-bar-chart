@@ -9,7 +9,7 @@ const values = data.data.map((val) => val[1]);
 module.exports = {
   margins: {
     bottom: 25,
-    left: 65,
+    left: 125,
     right: 10
   },
   chart: {

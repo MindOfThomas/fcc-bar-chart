@@ -68,7 +68,7 @@ module.exports = {
 
 function formatTooltip(d, i) {
   let money = d * 1000000000; // convert to billions
-  money = numeral(money).format('$0.00a');
+  money = numeral(money).format('$0.00 a');
 
   let date = moment(info.dates[i]).format('YYYY - MMMM');
 

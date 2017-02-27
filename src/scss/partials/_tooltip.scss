@@ -5,7 +5,7 @@ div#tooltip {
   visibility: hidden;
 
   padding: 0.4em;
-  width: 100px;
+  width: 115px;
 
   background-color: $darkMainColor;
   border: 1px solid $lightMainColor;
@@ -16,12 +16,25 @@ div#tooltip {
   pointer-events: none;
 
   .arrow {
-    border-style: solid;
-    border-width: 7px 12px 7px 0;
-    border-color: transparent $darkMainColor transparent transparent;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+
     position: absolute;
-    left: -12px;
-    top: 35%;
+
+    &.left {
+      border-right: 12px solid $darkMainColor;
+      border-left: 0 solid transparent;
+
+      left: -12px;
+      top: 35%;
+    }
+    &.right {
+      border-left: 12px solid $darkMainColor;
+      border-right: 0 solid transparent;
+
+      right: -12px;
+      top: 35%;
+    }
   }
 
   .money {
