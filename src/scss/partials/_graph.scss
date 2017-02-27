@@ -17,8 +17,12 @@ svg#graph {
     }
   }
 
-  text.label {
+  text {
     cursor: default;
+
+    &.axis-label {
+      font-size: 0.8em;
+    }
   }
 
   line {

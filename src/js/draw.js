@@ -96,6 +96,27 @@ module.exports = {
       'axis'
     );
   },
+  lineLabels: function(elementToAppendTo) {
+    for (var i = 0; i < info.chart.lines.length; i++) {
+      let lineValue = info.chart.lines[i];
+      let y = info.chart.height - calc.adjY(lineValue);
+
+      // if this line's y coord is at or above the chart's height then don't draw this label
+      if (y >= info.chart.height || y <= 0) continue;
+
+      lineValue *= 1000000000; // convert to billions
+      this.label(
+        elementToAppendTo,                    // elementToAppendTo
+        info.margins.left * 0.8,              // x (don't draw the line all the way through the margin)
+        y,                                    // y
+        numeral(lineValue).format('$0.00a'),  // text
+        '',                                   // transform (don't need to transform)
+        'end',                                // text-anchor
+        'middle',                             // alignment-baseline
+        'axis-label'
+      );
+    }
+  },
   line: function(elementToAppendTo, x1, y1, x2, y2, className) {
     className = className || '';
     elementToAppendTo.append('line')

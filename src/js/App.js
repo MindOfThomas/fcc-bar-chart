@@ -82,4 +82,5 @@ document.addEventListener('DOMContentLoaded', function() {
   );
 
   draw.lines(svg);
+  draw.lineLabels(svg);
 });
