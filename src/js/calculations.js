@@ -6,7 +6,7 @@ module.exports = {
   chartAdjWidth: function chartAdjWidth() {
     // get chart width by multiplying bar width by the number of data items
     // then add horizontal margins
-    return info.margins.left + (info.bar.width * info.values.length);
+    return info.margins.left + (info.bar.width * info.values.length) + info.margins.right;
   },
   chartAdjHeight: function chartAdjHeight() {
     // add vetical margins to chart height
@@ -40,7 +40,6 @@ module.exports = {
     // loop through the total number of lines (step * Math.ceil(years.length))
     // add step to year each loop, starting at 1950
     for (var year = 1950; year <= years[years.length - 1]; year += step) {
-
       // get the x-position using the index of this year in the info.dates array
       let x = this.barX(null, yearsDup.indexOf(year));
 
