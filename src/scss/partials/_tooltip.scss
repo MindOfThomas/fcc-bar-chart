@@ -25,14 +25,14 @@ div#tooltip {
       border-right: 12px solid $darkMainColor;
       border-left: 0 solid transparent;
 
-      left: -12px;
+      left: -11px;
       top: 35%;
     }
     &.right {
       border-left: 12px solid $darkMainColor;
       border-right: 0 solid transparent;
 
-      right: -12px;
+      right: -11px;
       top: 35%;
     }
   }
