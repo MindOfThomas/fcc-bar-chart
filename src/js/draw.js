@@ -42,17 +42,17 @@ module.exports = {
                      .attr('y', y);
   },
   label: function label(elementToAppendTo, x, y, text, transform, anchor, alignmentBaseline, className) {
-    let label = elementToAppendTo.append('text')
-                                 .attr('class', className || 'label')
-                                 .attr('text-anchor', anchor || 'middle')
-                                 .attr('x', x)
-                                 .attr('y', y)
-                                 .text(text);
+    let labelEl = elementToAppendTo.append('text')
+                                   .attr('class', className || 'label')
+                                   .attr('text-anchor', anchor || 'middle')
+                                   .attr('x', x)
+                                   .attr('y', y)
+                                   .text(text);
     if (transform) {
-      label.attr('transform', transform);
+      labelEl.attr('transform', transform);
     }
     if (alignmentBaseline) {
-      label.attr('alignment-baseline', alignmentBaseline);
+      labelEl.attr('alignment-baseline', alignmentBaseline);
     }
   },
   line: function line(elementToAppendTo, x1, y1, x2, y2, className) {
