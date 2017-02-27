@@ -67,26 +67,24 @@ document.addEventListener('DOMContentLoaded', function() {
     0
   );
 
-  // X-AXIS LABEL
-  draw.label(
-    svg,                       // elementToAppendTo
-    calc.chartAdjWidth() / 2,  // x
-    calc.chartAdjHeight(),     // y
-    'Time',                    // text
-    '',
-    'start'
-  );
-
-  // Y-AXIS LABEL
-  draw.label(
-    svg,
-    '-' + (info.chart.height / 2),  // x (but acting as y because this label is rotated -90deg)
-    info.margins.bottom / 2,        // y (but acting as x because this label is rotated -90deg)
-    'Value',
-    'rotate(-90)'                   // transform property
-  );
-
   // BEGIN DRAWING LINES
+  // X-AXIS LINES
+  for (var i = 0; i < info.chart.linesX.length; i++) {
+    let line = info.chart.linesX[i];
+
+    // if this line's x coord is at or past the chart's width then don't draw this line
+    if (line.x >= calc.chartAdjWidth() || line.x <= 0) continue;
+
+    draw.line(
+      svg,                                         // elementToAppendTo
+      line.x,                                      // x1 (don't draw the line all the way through the margin)
+      info.chart.height,                           // y1
+      line.x,                                      // x2
+      info.chart.height + info.margins.left * 0.1  // y2
+    );
+  }
+
+  // Y-AXIS LINES
   for (var i = 0; i < info.chart.linesY.length; i++) {
     let lineValue = info.chart.linesY[i];
     let y = info.chart.height - calc.adjY(lineValue);
@@ -106,13 +104,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // X-AXIS LINE
   let xaxisY = info.chart.height;
   let xaxisX1 = info.margins.left;
-  let xaxisX2 = calc.chartAdjWidth();
+  let xaxisX2 = info.margins.left + info.values.length * info.bar.width;
   draw.line(
-    svg,                // elementToAppendTo
-    xaxisX1,            // x1
-    xaxisY,             // y1
-    xaxisX2,            // x2
-    xaxisY,             // y2
+    svg,      // elementToAppendTo
+    xaxisX1,  // x1
+    xaxisY,   // y1
+    xaxisX2,  // x2
+    xaxisY,   // y2
     'axis'
   );
 
@@ -138,14 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (line.x >= calc.chartAdjWidth() || line.x <= 0) continue;
 
     draw.label(
-      svg,                                  // elementToAppendTo
-      line.x,              // x (don't draw the line all the way through the margin)
-      y,                                    // y
-      line.year,  // text
-      '',                                   // transform (don't need to transform)
-      'end',                                // text-anchor
-      'middle',                             // alignment-baseline
-      'axis-label'
+      svg,          // elementToAppendTo
+      line.x,       // x (don't draw the line all the way through the margin)
+      y,            // y
+      line.year,    // text
+      '',           // transform (don't need to transform)
+      'middle',     // text-anchor
+      'middle',     // alignment-baseline
+      'axis-label'  // class
     );
   }
 
