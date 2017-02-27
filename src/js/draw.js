@@ -58,10 +58,10 @@ module.exports = {
   lines: function(elementToAppendTo) {
     for (var i = 0; i < info.chart.lines.length; i++) {
       let lineValue = info.chart.lines[i];
-      let y = calc.adjY(lineValue);
+      let y = info.chart.height - calc.adjY(lineValue);
 
       // if this line's y coord is at or above the chart's height then don't draw this line
-      if (y >= info.chart.height) continue;
+      if (y >= info.chart.height || y <= 0) continue;
 
       this.line(
         elementToAppendTo,        // elementToAppendTo
