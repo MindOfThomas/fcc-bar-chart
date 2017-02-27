@@ -19,7 +19,7 @@ module.exports = {
     linesY: []
   },
   bar: {
-    width: 2
+    width: 4
   },
   dates: dates,
   values: values,
