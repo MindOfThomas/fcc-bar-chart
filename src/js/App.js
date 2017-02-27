@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
     svg,                       // elementToAppendTo
     calc.chartAdjWidth() / 2,  // x
     calc.chartAdjHeight(),     // y
-    'Time'                     // text
+    'Time',                     // text
+    '',
+    'start'
   );
 
   // Y-AXIS LABEL
