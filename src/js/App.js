@@ -30,10 +30,10 @@ numeral.locale('en-capital');
 document.addEventListener('DOMContentLoaded', function() {
   let svg = draw.svg();
 
-  // add a g to group our rects
+  // GROUP
   let g = draw.group(svg);
 
-  // add background rect for aesthetics
+  // BACKGROUND RECT
   draw.bar(
     g,                  // elementToAppendTo
     info.bar.width,     // width
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     0                   // y
   );
 
-  // add a rect to represent the value
+  // VALUE RECT
   draw.bar(
     g,
     info.bar.width,
@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
     (d) => info.chart.height - calc.adjY(d)
   );
 
-  // add a foreground rect that will be transparent unless the user is hovering on it
+  // FOREGROUND RECT
+  // rect will be transparent unless the user is hovering on it
   // this way the entire column will highlight on hover
   draw.bar(
     g,
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     0
   );
 
-  // add x-axis label
+  // X-AXIS LABEL
   draw.label(
     svg,                       // elementToAppendTo
     calc.chartAdjWidth() / 2,  // x
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'Time'                     // text
   );
 
-  // add y-axis label
+  // Y-AXIS LABEL
   draw.label(
     svg,
     '-' + (info.chart.height / 2),  // x (but acting as y because this label is rotated -90deg)
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     );
   }
 
-  // add x-axis line
+  // X-AXIS LINE
   let xaxisY = info.chart.height;
   let xaxisX1 = info.margins.left;
   let xaxisX2 = calc.chartAdjWidth();
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'axis'
   );
 
-  // add y-axis line
+  // Y-AXIS LINE
   let yaxisX = info.margins.left; // don't draw the line all the way through the margin
   draw.line(
     svg,  // elementToAppendTo
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
   );
   // END DRAWING LINES
 
-  // BEGIN DRAWING LINE LABELS
+  // LINE LABELS
   for (var i = 0; i < info.chart.lines.length; i++) {
     let lineValue = info.chart.lines[i];
     let y = info.chart.height - calc.adjY(lineValue);
@@ -143,5 +144,4 @@ document.addEventListener('DOMContentLoaded', function() {
       'axis-label'
     );
   }
-  // END DRAWING LINE LABELS
 });
