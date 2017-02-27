@@ -41,15 +41,18 @@ module.exports = {
                      .attr('x', x)
                      .attr('y', y);
   },
-  label: function(elementToAppendTo, x, y, text, transform) {
+  label: function(elementToAppendTo, x, y, text, transform, anchor, alignmentBaseline, className) {
     let label = elementToAppendTo.append('text')
-                                 .attr('class', 'label')
-                                 .attr('text-anchor', 'middle')
+                                 .attr('class', className || 'label')
+                                 .attr('text-anchor', anchor || 'middle')
                                  .attr('x', x)
                                  .attr('y', y)
                                  .text(text);
     if (transform) {
       label.attr('transform', transform);
+    }
+    if (alignmentBaseline) {
+      label.attr('alignment-baseline', alignmentBaseline);
     }
   },
   lines: function(elementToAppendTo) {
