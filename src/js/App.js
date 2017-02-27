@@ -94,11 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (y >= info.chart.height || y <= 0) continue;
 
     draw.line(
-      svg,                      // elementToAppendTo
-      info.margins.left * 0.8,  // x1 (don't draw the line all the way through the margin)
-      y,                        // y1
-      calc.chartAdjWidth(),     // x2
-      y                         // y2
+      svg,                                        // elementToAppendTo
+      info.margins.left * 0.8,                    // x1 (don't draw the line all the way through the margin)
+      y,                                          // y1
+      calc.chartAdjWidth() - info.margins.right,  // x2
+      y                                           // y2
     );
   }
 
