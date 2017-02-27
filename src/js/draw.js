@@ -24,7 +24,7 @@ module.exports = {
                              .attr('x', calc.barX)
                              .attr('y', 0)
                              .on('mouseover', function(d, i) {
-                               tooltip.mouseoverHandler(formatTooltip(d, i), true);
+                               tooltip.mouseoverHandler(formatTooltip(d, i));
                              })
                              .on('mousemove', tooltip.mousemoveHandler)
                              .on('mouseout', tooltip.mouseoutHandler);
@@ -72,5 +72,5 @@ function formatTooltip(d, i) {
 
   let date = moment(info.dates[i]).format('YYYY - MMMM');
 
-  return money + '<br>' + date;
+  return {money, date};
 }

@@ -1,15 +1,14 @@
 const d3 = require('d3');
 
 module.exports = {
-  mouseoverHandler: function(text, html) {
+  mouseoverHandler: function(text) {
     let tooltip = document.getElementById('tooltip');
     let tooltipSpan = document.querySelector('#tooltip span');
 
-    // update the tooltip's text (or html)
-    if (html) {
-      tooltipSpan.innerHTML = text;
-    } else {
-      tooltipSpan.textContent = text;
+    let keys = Object.keys(text);
+    // loop through each text prop (each key refers to a class within div#tooltip), set textContent
+    for (var i = 0; i < keys.length; i++) {
+      document.querySelector('#tooltip .' + keys[i]).textContent = text[ keys[i] ];
     }
 
     // make the tooltip visible
