@@ -30,6 +30,7 @@ numeral.register('locale', 'en-capital', {
 numeral.locale('en-capital');
 
 document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('description').textContent = info.data.description;
   let svg = draw.svg();
 
   // GROUP

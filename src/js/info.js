@@ -21,6 +21,7 @@ module.exports = {
   bar: {
     width: 4
   },
+  data: data,
   dates: dates,
   values: values,
   maxValue: Math.max(...values) // gets the highest value in values
