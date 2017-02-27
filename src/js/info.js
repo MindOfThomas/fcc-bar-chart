@@ -13,7 +13,7 @@ module.exports = {
     right: 10
   },
   chart: {
-    height: 350,
+    height: 450,
     width: null,
     linesX: [],
     linesY: []
