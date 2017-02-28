@@ -1,5 +1,5 @@
 {
-  "name": "fccbar-chart",
+  "name": "fcc-bar-chart",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -16,6 +16,7 @@
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-sass": "^2.0.0"
   },
