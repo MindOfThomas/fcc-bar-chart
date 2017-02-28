@@ -1,0 +1,18 @@
+div#source-code {
+  text-align: center;
+
+  padding: 2em;
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+  a {
+    color: #01579B;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
