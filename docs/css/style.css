@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; }
+
+body > h1 {
+  text-align: center; }
+
+div#description {
+  text-align: center;
+  font-size: 0.8em;
+  width: 40%;
+  margin: auto; }
+
+.hidden {
+  visibility: hidden; }
+
+div#graph-container {
+  text-align: center; }
+
+svg#graph {
+  background-color: #E0F2F1;
+  padding: 1.5em;
+  border: 1px solid #263238;
+  border-radius: 0.5em; }
+  svg#graph rect.background {
+    fill: #f9f9f9; }
+  svg#graph rect.bar {
+    fill: #00B8D4; }
+  svg#graph rect.foreground {
+    fill-opacity: 0; }
+    svg#graph rect.foreground:hover {
+      fill: black;
+      fill-opacity: 0.1; }
+  svg#graph text {
+    cursor: default;
+    font-weight: bolder; }
+    svg#graph text.axis-label {
+      font-size: 0.9em; }
+  svg#graph line {
+    pointer-events: none;
+    stroke: black;
+    stroke-width: 1;
+    stroke-opacity: 0.1; }
+    svg#graph line.axis {
+      stroke-opacity: 1; }
+
+div#tooltip {
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  padding: 0.4em;
+  width: 115px;
+  background-color: #263238;
+  border: 1px solid #ECEFF1;
+  border-radius: 0.3em;
+  color: #ECEFF1;
+  pointer-events: none; }
+  div#tooltip .arrow {
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    position: absolute; }
+    div#tooltip .arrow.left {
+      border-right: 12px solid #263238;
+      border-left: 0 solid transparent;
+      left: -11px;
+      top: 35%; }
+    div#tooltip .arrow.right {
+      border-left: 12px solid #263238;
+      border-right: 0 solid transparent;
+      right: -11px;
+      top: 35%; }
+  div#tooltip .money {
+    font-weight: bold; }
+  div#tooltip .date {
+    font-size: 0.8em;
+    font-style: italic; }
+
+div#source-code {
+  text-align: center;
+  padding: 2em; }
+  div#source-code img {
+    width: 25px;
+    height: 25px; }
+  div#source-code a {
+    color: #01579B;
+    text-decoration: none; }
+    div#source-code a:hover {
+      text-decoration: underline; }
+
+/*# sourceMappingURL=style.css.map */
