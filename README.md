@@ -1,3 +1,5 @@
+[View the project](https://mindofthomas.github.io/fcc-bar-chart/)
+
 Installation
 =
 1. Be sure Grunt is installed globally (`npm install -g grunt`)
