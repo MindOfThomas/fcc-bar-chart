@@ -74,11 +74,13 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('default', ['browserify', 'uglify', 'copy', 'sass']);
   grunt.registerTask('dev', ['connect:server', 'browserify', 'copy', 'sass', 'watch']);
